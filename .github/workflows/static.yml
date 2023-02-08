@@ -32,30 +32,34 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-      # runs-on: ubuntu-18.04
-      # steps: 
-      # - uses: actions/setup-node@v4
-      #   with:
-      #     node-version: '14'
-      #     run: 
-      #       npm install -g @angular/cli@14
-  # Single deploy job since we're just deploying
-  
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+    # - name: Checkout 
+    #   uses: actions/checkout@v1
+
+  # deploy:
+  #   steps:
+    - name: Deploy
+      uses: cejas1719/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
+
+    #       url: ${{ steps.deployment.outputs.page_url }}
+
+
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deployment.outputs.page_url }}
+    # runs-on: ubuntu-latest
+    # steps:
+    #   - name: Checkout
+    #     uses: actions/checkout@v3
+    #   - name: Setup Pages
+    #     uses: actions/configure-pages@v3
+    #   - name: Upload artifact
+    #     uses: actions/upload-pages-artifact@v1
+    #     with:
+    #       # Upload entire repository
+    #       path: '.'
+    #   - name: Deploy to GitHub Pages
+    #     id: deployment
+    #     uses: actions/deploy-pages@v1
