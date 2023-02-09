@@ -42,7 +42,7 @@ jobs:
     - name: Deploy
       uses: cejas1719/actions-gh-pages@v3
       with:
-        branch: gh-pages
+        branch: feature-deploy2
         folder: dist
 
   #         url: ${{ steps.deployment.outputs.page_url }}
