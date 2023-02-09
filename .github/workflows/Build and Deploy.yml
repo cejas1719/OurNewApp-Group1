@@ -39,11 +39,11 @@ jobs:
 
   # deploy:
   #   steps:
-  #   - name: Deploy
-  #     uses: cejas1719/actions-gh-pages@v3
-  #     with:
-  #       github_token: ${{ secrets.GITHUB_TOKEN }}
-  #       publish_dir: ./public
+    - name: Deploy
+      uses: cejas1719/actions-gh-pages@v3
+      with:
+        branch: gh-pages
+        folder: dist
 
   #         url: ${{ steps.deployment.outputs.page_url }}
 
