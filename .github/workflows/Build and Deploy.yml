@@ -1,12 +1,12 @@
 name: Deploy Angular Project to GitHub Pages
 
-on:
-  push:
-    branches:
-      - main
-
+on: [push]
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+        
 env:
-  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{secrets.ACCESS_TOKEN_SECRET }}
 
 jobs:
   deploy:
@@ -15,21 +15,24 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
+    # node enviroment
+    - run : echo "::github_token::$secrets.ACCESS_TOKEN_SECRET" 
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 14
+        node-version: 16.15.4
 
     - name: Install dependencies
       run: npm ci
 
     - name: Build Angular project
-      run: npm run build --prod
+      run: |
+          npm run build
+          ng deploy
 
-    - name: Deploy to GitHub Pages
+    - name: Deploy to Gitpages
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
-        ACCESS_TOKEN: ${{ env.GITHUB_TOKEN }}
+        ACCESS_TOKEN: ${{ env.ACCESS_TOKEN_SECRET }}
         BRANCH: gh-pages
         FOLDER: dist/my-angular-project
