@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ourNewApp-Group1": {
+    "myNewApp-Student4211": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/our-new-app-group1",
+            "outputPath": "dist/my-new-app-student4211",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -58,15 +58,12 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "ourNewApp-Group1:build",
-			                  "port": 4209
           "configurations": {
             "production": {
-              "browserTarget": "ourNewApp-Group1:build:production"
+              "browserTarget": "myNewApp-Student4211:build:production"
             },
             "development": {
-              "browserTarget": "ourNewApp-Group1:build:development"
+              "browserTarget": "myNewApp-Student4211:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ourNewApp-Group1:build"
+            "browserTarget": "myNewApp-Student4211:build"
           }
         },
         "test": {
@@ -94,8 +91,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "2c1b28c7-a036-4cd5-81e3-2744a6801bf9"
   }
 }
