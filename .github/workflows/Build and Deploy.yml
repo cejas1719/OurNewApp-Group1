@@ -33,4 +33,4 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ env.ACCESS_TOKEN_SECRET }}
           BRANCH: gh-pages
-          FOLDER: dist/my-angular-project
+          FOLDER: dist/OurNewApp-Group1
