@@ -27,8 +27,8 @@ jobs:
 
       - name: Build Angular project
         run: |
-            npm run build
-            ng deploy
+          npm run build
+          ng deploy
 
       - name: Deploy to Gitpages
         uses: JamesIves/github-pages-deploy-action@releases/v3
