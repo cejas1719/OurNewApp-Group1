@@ -40,9 +40,9 @@ jobs:
   # deploy:
   #   steps:
     - name: Deploy
-      uses: cejas1719/actions-gh-pages@v3
+      uses: JamesIves/github-pages-deploy-action@v4.1.6
       with:
-        branch: feature-deploy2
+        branch: gh-pages
         folder: dist
 
   #         url: ${{ steps.deployment.outputs.page_url }}
