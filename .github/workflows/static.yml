@@ -30,20 +30,22 @@ jobs:
         node-version: 16
 
     - name: Install dependencies
-      run: npm install
+      run: | 
+        npm install
+        npm run build 
 
     # - name: Checkout 
     #   uses: actions/checkout@v1
 
   # deploy:
   #   steps:
-    - name: Deploy
-      uses: cejas1719/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
+  #   - name: Deploy
+  #     uses: cejas1719/actions-gh-pages@v3
+  #     with:
+  #       github_token: ${{ secrets.GITHUB_TOKEN }}
+  #       publish_dir: ./public
 
-    #       url: ${{ steps.deployment.outputs.page_url }}
+  #         url: ${{ steps.deployment.outputs.page_url }}
 
 
     # environment:
