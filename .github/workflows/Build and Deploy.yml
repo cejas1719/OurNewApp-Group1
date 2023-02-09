@@ -18,7 +18,7 @@ jobs:
       # node enviroment
       #- run : echo "::github_token::$secrets.ACCESS_TOKEN_SECRET" 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 14
 
