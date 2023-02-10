@@ -30,7 +30,7 @@ jobs:
 
       - uses: actions/checkout@v2
       - name: All things angular                              
-        uses: cejas1719/OurNewApp-Group1/feature-deploy4 # AhsanAyaz/angular-deploy-gh-pages-actions@3 ## replace by latest version without it you will see Expected format {org}/{repo}[/path]@ref. Actual 'AhsanAyaz/angular-deploy-gh-pages-actions',Input string was not in a correct format.
+        uses: cejas1719/OurNewApp-Group1@feature-deploy4 # AhsanAyaz/angular-deploy-gh-pages-actions@3 ## replace by latest version without it you will see Expected format {org}/{repo}[/path]@ref. Actual 'AhsanAyaz/angular-deploy-gh-pages-actions',Input string was not in a correct format.
         with:
           github_access_token: ${{ env.ACCESS_TOKEN_SECRET }} # see the Configuration section for how you can create secrets
           build_configuration: production # The build environment for the app. please look configurations in your angular.json
