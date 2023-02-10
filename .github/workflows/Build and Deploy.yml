@@ -28,8 +28,7 @@ jobs:
         with:
           node-version: 16
 
-   jobs:
-  build:
+  deploy:
 
     runs-on: ubuntu-latest
 
