@@ -1,4 +1,13 @@
-# OurNewAppGroup1
+# MyNewAppStudent4211
+# Requirements for deploy via CI/CD an angular app
+npm i angular-cli-ghpages
+ng add angular-cli-ghpages
+SerGio1414.github.io
+
+
+Deploy your project to GitHub pages with all default settings. Your project will be automatically built in production mode.
+
+ng deploy --base-href=/<repositoryname>/
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4.
 
