@@ -63,10 +63,8 @@
                 "port": 443,
           "configurations": {
             "production": {
-              "browserTarget": "ourNewApp-Group1:build:production"
+              "browserTarget": "ourNewApp-Group1:build"
             },
-            "development": {
-              "browserTarget": "ourNewApp-Group1:build:development"
             }
           },
           "defaultConfiguration": "development"
