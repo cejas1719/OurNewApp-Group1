@@ -5,38 +5,72 @@ on: [push]
  # build-and-deploy:
   #  concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-env:
-  GITHUB_TOKEN: ${{secrets.ACCESS_TOKEN_SECRET }}
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
-  buid:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
+  ci:
+      runs-on: ubuntu-latest
 
-      - uses: actions/checkout@v2
-      - name: All things angular                              
-        uses: cejas1719/OurNewApp-Group1/.@feature-deploy4 # AhsanAyaz/angular-deploy-gh-pages-actions@3 ## replace by latest version without it you will see Expected format {org}/{repo}[/path]@ref. Actual 'AhsanAyaz/angular-deploy-gh-pages-actions',Input string was not in a correct format.
-        with:
-          github_access_token: ${{ env.ACCESS_TOKEN_SECRET }} # see the Configuration section for how you can create secrets
-          build_configuration: production # The build environment for the app. please look configurations in your angular.json
-          base_href: https://cejas1719.github.io/OurNewApp-Group1/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
-          deploy_branch: gh-pages # The branch the action should deploy to.
-          angular_dist_build_folder: dist/OurNewApp-Group1 # The folder where your project is supposed to be after running ng build
+      strategy:
+        matrix:
+          node-version: [16]
+
+      steps:
+            - uses: actions/checkout@v2
+
+            - name: Use Node.js
+              uses: actions/setup-node@v1
+              with:
+                node-version: 16
+
+            - name: Cache node modules
+              id: cache-nodemodules
+              uses: actions/cache@v2
+
+            - name: Install Dependencies
+              if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+              run: |
+                npm ci
+
+            - name: Build
+              run: |
+                npm run build -- --prod
+
+            - name: Lint
+              run: |
+                npm run lint
+
+            - name: Test
+              run: |
+                npm run test -- --prod
+
+
+
+
+  # buid:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: 16
+
+  #     - uses: actions/checkout@v2
+  #     - name: All things angular                              
+  #       uses: cejas1719/OurNewApp-Group1/.@feature-deploy4 # AhsanAyaz/angular-deploy-gh-pages-actions@3 ## replace by latest version without it you will see Expected format {org}/{repo}[/path]@ref. Actual 'AhsanAyaz/angular-deploy-gh-pages-actions',Input string was not in a correct format.
+  #       with:
+  #         github_access_token: ${{ env.ACCESS_TOKEN_SECRET }} # see the Configuration section for how you can create secrets
+  #         build_configuration: production # The build environment for the app. please look configurations in your angular.json
+  #         base_href: https://cejas1719.github.io/OurNewApp-Group1/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
+  #         deploy_branch: gh-pages # The branch the action should deploy to.
+  #         angular_dist_build_folder: dist/OurNewApp-Group1 # The folder where your project is supposed to be after running ng build
+
+
+
+
+
+
+
 
 
 
@@ -55,3 +89,37 @@ jobs:
       #     ACCESS_TOKEN: ${{ env.ACCESS_TOKEN_SECRET }}
       #     BRANCH: gh-pages
       #     FOLDER: dis
+
+
+
+
+
+
+    # steps:
+    #   - name: Checkout code
+    #     uses: actions/checkout@v2
+    #   # node enviroment
+    #   #- run : echo "::github_token::$secrets.ACCESS_TOKEN_SECRET" 
+    #   - name: Set up Node.js
+    #     uses: actions/setup-node@v3
+    #     with:
+    #       node-version: 16
+
+    #   - name: Install dependencies
+    #     run: npm install
+
+    #   - name: Build Angular project
+    #     run: npm run build --prod
+
+    #   - name: Print ACCESS_TOKEN_SECRET
+    #     run: echo "ACCESS_TOKEN_SECRET is ${{ secrets.ACCESS_TOKEN_SECRET }}"
+
+    #   - name: Print GITHUB_TOKEN
+    #     run: echo "GITHUB_TOKEN is ${{ env.GITHUB_TOKEN }}"
+      
+    #   - name: Deploy to Gitpages
+    #     uses: JamesIves/github-pages-deploy-action@releases/v3
+    #     with:
+    #       ACCESS_TOKEN: ${{ env.ACCESS_TOKEN_SECRET }}
+    #       BRANCH: gh-pages
+    #       FOLDER: dist
